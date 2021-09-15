@@ -1,5 +1,5 @@
 #include <Common/SettingsChanges.h>
-
+#include <Columns/IColumn.h>
 
 namespace DB
 {
@@ -45,6 +45,24 @@ Field * SettingsChanges::tryGet(const std::string_view & name)
     if (!change)
         return nullptr;
     return &change->value;
+}
+
+
+void SettingChange::dumpToMap(Map & map) const
+{
+    Tuple pair;
+    pair.push_back(name);
+    pair.push_back(toString(value));
+    map.push_back(pair);
+
+}
+
+void SettingsChanges::dumpToMapColumn(IColumn & column) const
+{
+    Map map;
+    for (const auto & change : *this)
+        change.dumpToMap(map);
+    column.insert(map);
 }
 
 }

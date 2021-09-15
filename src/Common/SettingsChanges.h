@@ -5,6 +5,9 @@
 
 namespace DB
 {
+
+class IColumn;
+
 struct SettingChange
 {
     String name;
@@ -16,6 +19,8 @@ struct SettingChange
 
     friend bool operator ==(const SettingChange & lhs, const SettingChange & rhs) { return (lhs.name == rhs.name) && (lhs.value == rhs.value); }
     friend bool operator !=(const SettingChange & lhs, const SettingChange & rhs) { return !(lhs == rhs); }
+
+    void dumpToMap(Map & map) const;
 };
 
 
@@ -27,6 +32,8 @@ public:
     bool tryGet(const std::string_view & name, Field & out_value) const;
     const Field * tryGet(const std::string_view & name) const;
     Field * tryGet(const std::string_view & name);
+
+    void dumpToMapColumn(IColumn & column) const;
 };
 
 }
