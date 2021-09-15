@@ -620,10 +620,10 @@ void TCPHandler::processOrdinaryQuery()
                 /// Some time passed.
                 after_send_progress.restart();
                 sendProgress();
+                sendProfileEvents();
             }
 
             sendLogs();
-            sendProfileEvents();
 
             if (async_in.poll(interactive_delay / 1000))
             {
@@ -648,7 +648,7 @@ void TCPHandler::processOrdinaryQuery()
             sendExtremes(state.io.in->getExtremes());
             sendProfileInfo(state.io.in->getProfileInfo());
             sendProgress();
-            // sendProfileEvents();
+            sendProfileEvents();
         }
 
         if (state.is_connection_closed)
@@ -697,10 +697,10 @@ void TCPHandler::processOrdinaryQueryWithProcessors()
                 /// Some time passed and there is a progress.
                 after_send_progress.restart();
                 sendProgress();
+                sendProfileEvents();
             }
 
             sendLogs();
-            sendProfileEvents();
 
             if (block)
             {
@@ -723,7 +723,7 @@ void TCPHandler::processOrdinaryQueryWithProcessors()
             sendProfileInfo(executor.getProfileInfo());
             sendProgress();
             sendLogs();
-            // sendProfileEvents();
+            sendProfileEvents();
         }
 
         if (state.is_connection_closed)
