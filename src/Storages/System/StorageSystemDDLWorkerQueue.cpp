@@ -131,7 +131,7 @@ static void repeatValuesInCommonColumns(MutableColumns & res_columns, size_t num
     /// Copy values from previous row
     assert(res_columns[num_filled_columns - 1]->size() == res_columns[num_filled_columns]->size());
     for (size_t filled_col = 0; filled_col < num_filled_columns; ++filled_col)
-        res_columns[filled_col]->insertFrom(*res_columns[filled_col], res_columns[filled_col]->size() - 1);
+        res_columns[filled_col]->insert((*res_columns[filled_col])[res_columns[filled_col]->size() - 1]);
 }
 
 static void fillHostnameColumns(MutableColumns & res_columns, size_t & col, const HostID & host_id)
