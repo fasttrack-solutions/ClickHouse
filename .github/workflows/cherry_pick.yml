@@ -28,7 +28,7 @@ jobs:
           REPO_TEAM=core
           EOF
       - name: Check out repository code
-        uses: ClickHouse/checkout@v1
+        uses: ClickHouse/checkout@be8c5ea830d63118a450b6d01b7aec11c033abd3 # v1.2.0
         with:
           clear-repository: true
           token: ${{secrets.ROBOT_CLICKHOUSE_COMMIT_TOKEN}}
